@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@storinka/client@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@storinka/client/-/client-1.6.0.tgz#1240b50a9c98e7c7e1a78a06c6ab02b919ff67f8"
+  integrity sha512-4k3nmj+os0J+WRSEgLPq/QLMNQ6yXo8PCkmMWMwMxtUR99jxk4aCfwnzMuaux2Y8+RLx2oZZfoIhAj54SQ/cqg==
+
 "@types/strip-bom@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/strip-bom/-/strip-bom-3.0.0.tgz#14a8ec3956c2e81edb7520790aecf21c290aebd2"

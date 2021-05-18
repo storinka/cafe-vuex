@@ -4,6 +4,8 @@ interface FullCafe {
 
     domain?: string;
     slug?: string;
+
+    [key: string]: any;
 }
 
 interface SkinState {
@@ -11,6 +13,7 @@ interface SkinState {
     advertisements: any;
     discounts: any;
 
+    resolvingId?: string | null;
     cafeId?: string | null;
 }
 
@@ -98,10 +101,9 @@ export function createStoreModule(options: CreateSkinStoreOptions) {
                 { id, locale = options.locale }: { id: any; locale?: string; }
             ) {
                 state.cafeId = id;
+                state.resolvingId = id;
 
                 const resolveAdvertisements = async () => {
-                    console.log("resolving advertisements");
-
                     const advertisements = await client.invoke("getCafeAdvertisements", {
                         id,
                         locale,
@@ -112,14 +114,10 @@ export function createStoreModule(options: CreateSkinStoreOptions) {
                         advertisements,
                     });
 
-                    console.log("resolved advertisements");
-
                     return advertisements;
                 };
 
                 const resolveDiscounts = async () => {
-                    console.log("resolving discounts");
-
                     const discounts = await client.invoke("getCafeDiscounts", {
                         id,
                         locale,
@@ -130,22 +128,16 @@ export function createStoreModule(options: CreateSkinStoreOptions) {
                         discounts,
                     });
 
-                    console.log("resolved discounts");
-
                     return discounts;
                 };
 
                 const resolveCafe = async () => {
-                    console.log("resolving cafe");
-
                     const cafe = await client.invoke("getFullCafe", {
                         id,
                         locale,
                     });
 
                     commit("setCafe", cafe);
-
-                    console.log("resolved cafe");
 
                     return cafe;
                 }
@@ -156,11 +148,15 @@ export function createStoreModule(options: CreateSkinStoreOptions) {
                     resolveDiscounts
                 ]);
 
-                return {
+                const result = {
                     cafe: await cafe(),
                     advertisements: await advertisements(),
                     discounts: await discounts(),
                 };
+
+                state.resolvingId = null;
+
+                return result;
             },
         }
     };
