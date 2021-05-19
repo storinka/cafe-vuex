@@ -1,6 +1,6 @@
 {
     "name": "@storinka/cafe-vuex",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "A store for Storinka theme with Vuex.",
     "repository": "https://github.com/storinka/cafe-vuex",
     "author": "Davyd Kohut",
